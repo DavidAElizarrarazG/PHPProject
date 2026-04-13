@@ -1,0 +1,62 @@
+<html>
+	<body>
+		<h1>Create Employee</h1>
+		<form action="2026_create_process.php" method="post">
+
+		First Name: <input type="text" id="firstname" name="firstname"><br><br>
+
+		Last Name: <input type="text" id="lastname" name="lastname"><br><br>
+
+		E-mail: <input type="email" id="email" name="email"><br><br>
+
+		Phone: <input type="tel" id="phone" name="phone"><br><br>
+
+		<!-- SELECT control -->
+		Department:
+		<select id="department" name="department">
+			<option value="">-- Select --</option>
+			<option value="HR">HR</option>
+			<option value="IT">IT</option>
+			<option value="Sales">Sales</option>
+			<option value="Marketing">Marketing</option>
+			<option value="Finance">Finance</option>
+		</select><br><br>
+
+		<!-- RADIO BUTTON set -->
+		Gender:
+		<input type="radio" id="male" name="gender" value="Male"> <label for="male">Male</label>
+		<input type="radio" id="female" name="gender" value="Female"> <label for="female">Female</label>
+		<input type="radio" id="other" name="gender" value="Other"> <label for="other">Other</label><br><br>
+
+		<!-- CHECKBOX set -->
+		Skills:<br>
+		<input type="checkbox" id="php" name="skills[]" value="PHP"> <label for="php">PHP</label>
+		<input type="checkbox" id="mysql" name="skills[]" value="MySQL"> <label for="mysql">MySQL</label>
+		<input type="checkbox" id="javascript" name="skills[]" value="JavaScript"> <label for="javascript">JavaScript</label>
+		<input type="checkbox" id="htmlcss" name="skills[]" value="HTML/CSS"> <label for="htmlcss">HTML/CSS</label>
+		<input type="checkbox" id="python" name="skills[]" value="Python"> <label for="python">Python</label><br><br>
+
+		<!-- TEXTAREA control -->
+		Bio:<br>
+		<textarea id="bio" name="bio" rows="4" cols="50"></textarea><br><br>
+
+		<!-- DATE control -->
+		Hire Date: <input type="date" id="hiredate" name="hiredate"><br><br>
+
+		Salary: <input type="number" id="salary" name="salary" step="0.01"><br><br>
+
+		<!-- Second SELECT control -->
+		Status:
+		<select id="status" name="status">
+			<option value="">-- Select --</option>
+			<option value="Active">Active</option>
+			<option value="Inactive">Inactive</option>
+			<option value="On Leave">On Leave</option>
+		</select><br><br>
+
+		<input type="submit" value="Create Employee">
+		</form>
+		<br>
+		<a href="2026_menu.html">Back to Menu</a>
+	</body>
+</html>
