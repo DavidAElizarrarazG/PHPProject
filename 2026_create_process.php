@@ -1,55 +1,58 @@
+<?php include 'header.php'; ?>
 <?php
 $servername = "db";
 $username = "user2025";
 $password = "user2025";
 $dbname = "kashi";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+  die("<div class='msg-error'>⚠️ Connection failed: " . $conn->connect_error . "</div>");
 }
 
-// SQL query template
-$sql = "INSERT INTO Employees (FirstName, LastName, Email, Phone, Department, Gender, Skills, Bio, HireDate, Salary, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO Foods (FoodName, Origin, ChefEmail, ImageURL, Category, SpicyLevel, DietaryTags, Description, DateAdded, Price, Availability) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-// Prepare the SQL query template
 if($stmt = $conn->prepare($sql)) {
-  // Bind parameters
-  $stmt->bind_param("sssssssssds", $FirstName, $LastName, $Email, $Phone, $Department, $Gender, $Skills, $Bio, $HireDate, $Salary, $Status);
+  $stmt->bind_param("sssssssssds", $FoodName, $Origin, $ChefEmail, $ImageURL, $Category, $SpicyLevel, $DietaryTags, $Description, $DateAdded, $Price, $Availability);
 
-  // Set parameters from POST
-  $FirstName = $_POST["firstname"];
-  $LastName = $_POST["lastname"];
-  $Email = $_POST["email"];
-  $Phone = $_POST["phone"];
-  $Department = $_POST["department"];
-  $Gender = $_POST["gender"];
+  $FoodName = $_POST["foodname"];
+  $Origin = $_POST["origin"];
+  $ChefEmail = $_POST["chefemail"];
+  $ImageURL = $_POST["imageurl"];
+  $Category = $_POST["category"];
+  $SpicyLevel = $_POST["spicylevel"];
 
   // Checkboxes come as an array, join them with commas
-  if(isset($_POST["skills"])) {
-    $Skills = implode(", ", $_POST["skills"]);
+  if(isset($_POST["dietarytags"])) {
+    $DietaryTags = implode(", ", $_POST["dietarytags"]);
   } else {
-    $Skills = "";
+    $DietaryTags = "";
   }
 
-  $Bio = $_POST["bio"];
-  $HireDate = $_POST["hiredate"];
-  $Salary = $_POST["salary"];
-  $Status = $_POST["status"];
+  $Description = $_POST["description"];
+  $DateAdded = empty($_POST["dateadded"]) ? date("Y-m-d") : $_POST["dateadded"];
+  $Price = $_POST["price"];
+  $Availability = $_POST["availability"];
 
   $stmt->execute();
 
-  echo "New employee created successfully: " . $FirstName . " " . $LastName;
+  echo '<div class="page-header">';
+  echo '  <h1><span class="gradient-text">Success!</span></h1>';
+  echo '</div>';
+  echo '<div class="msg-success">✅ <strong>' . htmlspecialchars($FoodName) . '</strong> (' . htmlspecialchars($Origin) . ') has been added successfully.</div>';
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  echo '<div class="page-header"><h1>Error</h1></div>';
+  echo '<div class="msg-error">⚠️ Error: ' . $conn->error . '</div>';
 }
 
 $stmt->close();
 $conn->close();
 ?>
-<br><br>
-<a href="2026_create.html">Create Another</a> |
-<a href="2026_menu.html">Back to Menu</a>
+
+<div class="action-links">
+    <a href="2026_create.php">➕ Create Another</a>
+    <span class="separator">·</span>
+    <a href="2026_menu.php">← Back to Dashboard</a>
+</div>
+
+<?php include 'footer.php'; ?>

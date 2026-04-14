@@ -1,3 +1,4 @@
+<?php include 'header.php'; ?>
 <!--2026_search_process2.php-->
 
 <?php
@@ -22,17 +23,17 @@ $Value = $_POST["Value"];
 switch($Field){
 	
 	case "Name":
-		$stmt = $conn->prepare("SELECT Name, Email, Phone FROM contacts WHERE Name = ?");
+		$stmt = $conn->prepare("SELECT Name, ChefEmail, ImageURL FROM contacts WHERE Name = ?");
 		$stmt->bind_param("s", $Value);
 		break;
 		
-	case "Email":
-		$stmt = $conn->prepare("SELECT Name, Email, Phone FROM contacts WHERE Email = ?");
+	case "ChefEmail":
+		$stmt = $conn->prepare("SELECT Name, ChefEmail, ImageURL FROM contacts WHERE ChefEmail = ?");
 		$stmt->bind_param("s", $Value);
 		break;
 		
-	case "Phone":
-		$stmt = $conn->prepare("SELECT Name, Email, Phone FROM contacts WHERE Phone = ?");
+	case "ImageURL":
+		$stmt = $conn->prepare("SELECT Name, ChefEmail, ImageURL FROM contacts WHERE ImageURL = ?");
 		$stmt->bind_param("i", $Value);
 		break;
 	
@@ -40,14 +41,14 @@ switch($Field){
   
 if($stmt->execute()){
 $result = $stmt->get_result();
-echo '<table border=1>';
-echo '<tr><td>Name</td><td>Email</td><td>Phone</td></tr>';
+echo "<div class='table-container'><table>";
+echo '<tr><td>Name</td><td>ChefEmail</td><td>ImageURL</td></tr>';
 
 while($row = $result->fetch_assoc()){
-	echo "<tr><td>" . $row["Name"] . "</td><td>" . $row["Email"] . "</td><td>" . $row["Phone"] . "</td></tr>";
+	echo "<tr><td>" . $row["Name"] . "</td><td>" . $row["ChefEmail"] . "</td><td><img src=\"" . $row["ImageURL"] . "\" class=\"food-img\" alt=\"Food Image\"></td></tr>";
 }
 
-echo "</table>";
+echo "</table></div>";
 }else{
   echo "Error";
 }
@@ -55,3 +56,4 @@ echo "</table>";
 $stmt->close();
 $conn->close();
 ?>
+<?php include 'footer.php'; ?>

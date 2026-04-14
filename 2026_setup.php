@@ -1,3 +1,10 @@
+<?php include 'header.php'; ?>
+
+<div class="page-header">
+    <h1><span class="gradient-text">Database Setup</span></h1>
+    <p>Initializing the Foods table…</p>
+</div>
+
 <?php
 $servername = "db";
 $username = "user2025";
@@ -9,31 +16,38 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+  die("<div class='msg-error'>⚠️ Connection failed: " . $conn->connect_error . "</div>");
 }
 
-// Create Employees table
-$sql = "CREATE TABLE IF NOT EXISTS Employees (
-  EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
-  FirstName VARCHAR(100) NOT NULL,
-  LastName VARCHAR(100) NOT NULL,
-  Email VARCHAR(150),
-  Phone VARCHAR(20),
-  Department VARCHAR(50),
-  Gender VARCHAR(10),
-  Skills VARCHAR(255),
-  Bio TEXT,
-  HireDate DATE,
-  Salary DECIMAL(10,2),
-  Status VARCHAR(20)
+// Create Foods table
+$sql = "CREATE TABLE IF NOT EXISTS Foods (
+  FoodID INT AUTO_INCREMENT PRIMARY KEY,
+  FoodName VARCHAR(100) NOT NULL,
+  Origin VARCHAR(100) NOT NULL,
+  ChefEmail VARCHAR(150),
+  ImageURL VARCHAR(255),
+  Category VARCHAR(50),
+  SpicyLevel VARCHAR(10),
+  DietaryTags VARCHAR(255),
+  Description TEXT,
+  DateAdded DATE,
+  Price DECIMAL(10,2),
+  Availability VARCHAR(20)
 )";
 
 if ($conn->query($sql) === TRUE) {
-  echo "Table 'Employees' created successfully.<br>";
-  echo "<a href='2026_menu.html'>Go to Menu</a>";
+  echo '<div class="msg-success">✅ Table <strong>Foods</strong> created successfully!</div>';
 } else {
-  echo "Error creating table: " . $conn->error;
+  echo '<div class="msg-error">⚠️ Error creating table: ' . $conn->error . '</div>';
 }
 
 $conn->close();
 ?>
+
+<div class="action-links">
+    <a href="2026_menu.php">← Go to Dashboard</a>
+    <span class="separator">·</span>
+    <a href="2026_create.php">➕ Add Your First Food</a>
+</div>
+
+<?php include 'footer.php'; ?>

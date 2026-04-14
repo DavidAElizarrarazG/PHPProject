@@ -1,3 +1,4 @@
+<?php include 'header.php'; ?>
 <?php
 $servername = "localhost";
 $username = "user2025";
@@ -12,11 +13,11 @@ if ($conn->connect_error) {
 }
 
 $Name = $_POST["name"];
-$Email = $_POST["email"];
-$Phone = $_POST["phone"];
+$ChefEmail = $_POST["chefemail"];
+$ImageURL = $_POST["imageurl"];
 
-$sql = "INSERT INTO contacts (Name, Email, Phone)
-VALUES ('" . $Name . "', '" . $Email . "', '" . $Phone . "')";
+$sql = "INSERT INTO contacts (Name, ChefEmail, ImageURL)
+VALUES ('" . $Name . "', '" . $ChefEmail . "', '" . $ImageURL . "')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
@@ -26,3 +27,4 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?>
+<?php include 'footer.php'; ?>
